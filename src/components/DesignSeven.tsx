@@ -1,80 +1,123 @@
 "use client";
-import React from 'react';
-import { Search, ShoppingBag, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { ShoppingBag, Search, Menu, Leaf, ArrowRight, Heart, Globe, Wind } from 'lucide-react';
 
-const PRODUCTS = [
-  { id: 1, name: "Classic Tee", cat: "Tops", price: "$38", tag: "New", color: "#f0ece6", svgColor: "#ddd8d0", dots: ["#1a1a1a", "#e8ddd0"] },
-  { id: 2, name: "Utility Jacket", cat: "Outerwear", price: "$148", tag: "Popular", color: "#1a1a1a", svgColor: "#2a2a2a", dots: ["#555", "#c8b898"], isDark: true },
-  { id: 3, name: "Pullover Hoodie", cat: "Tops", price: "$88", color: "#eaecf0", svgColor: "#d8dce8", dots: ["#c0c8d8", "#1a1a1a"] },
-  { id: 4, name: "Zip-Up Hoodie", cat: "Tops", price: "$96", tag: "New", color: "#f0ece6", svgColor: "#ddd8ce", dots: ["#d8d0c4", "#2d3a48"] },
-  { id: 5, name: "Double Zip Hoodie", cat: "Tops", price: "$108", color: "#ede8f4", svgColor: "#dcd4ec", dots: ["#dcd4ec", "#1a1a1a"] },
-  { id: 6, name: "Crewneck Sweatshirt", cat: "Tops", price: "$78", color: "#eaebe8", svgColor: "#d4d8cc", dots: ["#d4d8cc", "#8a7060"] },
-  { id: 7, name: "Style Trousers", cat: "Bottoms", price: "$89", oldPrice: "$128", tag: "Sale", color: "#f0ebe4", svgColor: "#ddd4c4", dots: ["#c8b8a0", "#1a1a1a"] },
-  { id: 8, name: "Relaxed Sweatpants", cat: "Bottoms", price: "$72", color: "#1a1a1a", svgColor: "#282828", dots: ["#444", "#c8c0b4"], isDark: true },
-];
+export default function DesignOne() {
+  const [cartCount, setCartCount] = useState(0);
+  const [activeTab, setActiveTab] = useState('All');
 
-export default function DesignSeven() {
+  const products = [
+    {
+      id: 1,
+    name: "Raw Organic Cotton Robe",
+    price: "$185",
+    material: "100% Organic Cotton",
+    image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=800"
+  },
+    {
+      id: 2,
+      name: "Hemp Blend Lounge Set",
+      price: "$210",
+      material: "Hemp & Silk",
+      image: "https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      id: 3,
+      name: "Recycled Wool Cardigan",
+      price: "$245",
+      material: "Upcycled Merino",
+      image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      id: 4,
+      name: "Natural Dye Tunic",
+      price: "$130",
+      material: "Botanical Dyes",
+      image: "https://images.unsplash.com/photo-1518622358385-8ea7d0794bf6?auto=format&fit=crop&q=80&w=800"
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-white text-zinc-900 px-6 py-10 font-sans selection:bg-zinc-900 selection:text-white">
-      {/* NAV */}
-      <nav className="flex justify-between items-center pb-8 border-b border-zinc-100 mb-10">
-        <h1 className="text-2xl font-serif tracking-tighter italic">ESSNT.</h1>
-        <div className="hidden md:flex gap-8 text-[11px] uppercase tracking-widest font-medium text-zinc-400">
-          <span>New</span><span>Men</span><span>Women</span><span>Sale</span>
+    <div className="min-h-screen bg-[#F4F1EE] text-[#4A443F] font-light selection:bg-[#D4CEC5] selection:text-[#4A443F]">
+      <nav className="fixed top-0 w-full z-40 px-6 py-8 flex justify-between items-center mix-blend-multiply">
+        <button className="p-2 hover:rotate-90 transition-transform duration-500">
+          <Menu size={20} strokeWidth={1.5} />
+        </button>
+        <div className="text-center">
+          <h1 className="text-2xl md:text-3xl font-serif tracking-[0.2em] uppercase font-medium">Terra</h1>
+          <span className="text-[10px] tracking-[0.4em] uppercase opacity-60">Studio</span>
         </div>
-        <div className="flex gap-4">
-          <div className="w-9 h-9 rounded-full border border-zinc-200 flex items-center justify-center cursor-pointer"><Search size={14} /></div>
-          <div className="w-9 h-9 rounded-full border border-zinc-200 flex items-center justify-center cursor-pointer"><ShoppingBag size={14} /></div>
+        <div className="flex items-center space-x-6">
+          <Search size={20} strokeWidth={1.5} className="hidden sm:block cursor-pointer" />
+          <div className="relative cursor-pointer group" onClick={() => setCartCount(c => c + 1)}>
+            <ShoppingBag size={20} strokeWidth={1.5} />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 text-[9px] w-3 h-3 flex items-center justify-center">({cartCount})</span>
+            )}
+          </div>
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-16 rounded-3xl overflow-hidden min-h-100">
-        <div className="bg-[#f7f5f2] p-12 flex flex-col justify-between">
-          <div><p className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 mb-4">SS25</p><h2 className="text-5xl md:text-6xl font-serif leading-none tracking-tighter mb-6">The<br/><span className="italic text-zinc-400">Essential</span><br/>Tee</h2></div>
-          <button className="bg-zinc-900 text-white text-[10px] font-bold uppercase tracking-widest px-8 py-4 rounded-full w-fit flex items-center gap-3">Shop Now <ArrowRight size={14} /></button>
-        </div>
-        <div className="bg-zinc-900 p-12 flex flex-col justify-between text-white">
-          <div><p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-4">Featured</p><h2 className="text-5xl md:text-6xl font-serif leading-none tracking-tighter mb-6">Utility<br/><span className="italic text-zinc-500">Jacket</span><br/>25</h2></div>
-          <button className="bg-white text-zinc-900 text-[10px] font-bold uppercase tracking-widest px-8 py-4 rounded-full w-fit flex items-center gap-3">Explore <ArrowRight size={14} /></button>
-        </div>
-      </div>
-
-      {/* PRODUCT GRID (Mapped 8 items) */}
-      <div className="flex justify-between items-baseline mb-8"><h3 className="text-2xl font-serif italic">All Products</h3><span className="text-[10px] text-zinc-400 uppercase tracking-widest">8 pieces</span></div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
-        {PRODUCTS.map((p) => (
-          <div key={p.id} className="group cursor-pointer">
-            <div className={`aspect-4/5 rounded-2xl flex items-center justify-center relative overflow-hidden transition-transform duration-500 hover:-translate-y-1`} style={{backgroundColor: p.color}}>
-              {p.tag && <span className={`absolute top-4 left-4 text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full ${p.isDark ? 'bg-white text-zinc-900' : 'bg-zinc-900 text-white'}`}>{p.tag}</span>}
-              <svg width="80" height="80" viewBox="0 0 60 70" fill="none">
-                <path d="M10 16 L0 32 L12 35 L12 62 L48 62 L48 35 L60 32 L50 16 L40 10 L35 20 L25 20 L20 10Z" fill={p.svgColor} strokeOpacity="0.2" stroke="black" strokeWidth="1.2"/>
-              </svg>
+      <section className="relative pt-32 pb-20 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="lg:col-span-5 z-10">
+          <div className="flex items-center space-x-2 text-[#8C8476] mb-6">
+            <Leaf size={14} />
+            <span className="text-[10px] uppercase tracking-widest font-bold">Ethically Sourced</span>
+          </div>
+          <h2 className="text-6xl md:text-8xl font-serif leading-[1.1] mb-8">Woven by <br /><span className="italic">Nature</span></h2>
+          <p className="text-lg leading-relaxed mb-10 opacity-80 max-w-sm">Sustainable garments designed to breathe with you and return to the earth.</p>
+          <button className="group flex items-center space-x-4">
+            <div className="w-12 h-12 rounded-full border border-[#4A443F] flex items-center justify-center group-hover:bg-[#4A443F] group-hover:text-white transition-all duration-300">
+              <ArrowRight size={20} strokeWidth={1} />
             </div>
-            <div className="pt-4 px-1">
-              <p className="text-[9px] uppercase tracking-widest text-zinc-400 mb-1">{p.cat}</p>
-              <h4 className={`text-sm font-medium mb-3 ${p.isDark ? 'text-zinc-900' : 'text-zinc-900'}`}>{p.name}</h4>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-bold">{p.oldPrice && <span className="text-zinc-300 line-through mr-2 font-normal">{p.oldPrice}</span>}{p.price}</span>
-                <div className="flex gap-1">
-                  {p.dots.map(dot => <div key={dot} className="w-2 h-2 rounded-full border border-zinc-100" style={{backgroundColor: dot}}></div>)}
-                </div>
+            <span className="text-xs uppercase tracking-[0.2em] font-bold">Explore Materials</span>
+          </button>
+        </div>
+        <div className="lg:col-span-7 relative">
+  <div className="aspect-4/5 bg-[#EBE7E0] overflow-hidden rounded-t-[200px] rounded-b-lg shadow-inner">
+    <img 
+      src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?q=80&w=1200" 
+      className="w-full h-full object-cover mix-blend-multiply opacity-95"
+      alt="Woven by Nature"
+    />
+  </div>
+        </div>
+      </section>
+
+      <section className="bg-[#EBE7E0] py-20 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
+          <div className="flex flex-col items-center text-center space-y-4"><Wind size={24} strokeWidth={1} /><h4 className="font-serif text-xl">Breathable Design</h4></div>
+          <div className="flex flex-col items-center text-center space-y-4"><Globe size={24} strokeWidth={1} /><h4 className="font-serif text-xl">Earth First</h4></div>
+          <div className="flex flex-col items-center text-center space-y-4"><Heart size={24} strokeWidth={1} /><h4 className="font-serif text-xl">Fair Craft</h4></div>
+        </div>
+      </section>
+
+      <section className="py-32 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-24">
+          {products.map((p, idx) => (
+            <div key={p.id} className={`group cursor-pointer ${idx % 2 !== 0 ? 'md:mt-24' : ''}`}>
+              <div className="aspect-3/4 overflow-hidden bg-[#EBE7E0] mb-8 relative">
+                <img src={p.image} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt={p.name} />
+              </div>
+              <div className="flex justify-between items-end border-b border-[#4A443F]/10 pb-4">
+                <div><h4 className="text-xl font-serif mb-1">{p.name}</h4><p className="text-[10px] uppercase tracking-widest text-[#8C8476]">{p.material}</p></div>
+                <span className="text-lg">{p.price}</span>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* STRIP */}
-      <div className="bg-[#f7f5f2] rounded-3xl p-10 flex flex-col lg:flex-row justify-between items-center gap-8">
-        <div className="text-center lg:text-left"><h4 className="text-2xl font-serif italic mb-2">Made to move. Built to last.</h4><p className="text-[10px] text-zinc-400 uppercase tracking-widest">Free express shipping · Sustainable materials</p></div>
-        <div className="flex gap-12 text-center">
-          <div><p className="text-2xl font-serif">8</p><p className="text-[9px] text-zinc-400 uppercase tracking-widest">Products</p></div>
-          <div><p className="text-2xl font-serif">24</p><p className="text-[9px] text-zinc-400 uppercase tracking-widest">Colors</p></div>
-          <div><p className="text-2xl font-serif">SS25</p><p className="text-[9px] text-zinc-400 uppercase tracking-widest">Season</p></div>
+          ))}
         </div>
-      </div>
-      <style dangerouslySetInnerHTML={{ __html: `@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap'); .font-serif { font-family: 'DM Serif Display', serif; } body { font-family: 'DM Sans', sans-serif; }`}} />
+      </section>
+
+      <footer className="py-32 px-6 border-t border-[#4A443F]/5 text-center">
+        <h2 className="text-4xl font-serif mb-8">Terra</h2>
+        <p className="text-xs tracking-widest opacity-60">© 2024 TERRA STUDIO - SUSTAINABLE CRAFT</p>
+      </footer>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;700&display=swap');
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        body { font-family: 'Montserrat', sans-serif; }
+      `}} />
     </div>
   );
 }
