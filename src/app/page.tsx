@@ -1,11 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import DesignOne from "../components/DesignOne";
-import DesignTwo from "../components/DesignTwo";
 import DesignThree from "../components/DesignThree";
 import DesignFour from "../components/DesignFour"; // import အသစ်
 import DesignFive from "../components/DesignFive"; // import အသစ်
-import DesignSix from "../components/DesignSix"; // import အသစ်
 import DesignSeven from "../components/DesignSeven"; // New
 import DesignEight from "../components/DesignEight"; // New
 
@@ -35,11 +33,9 @@ export default function Home() {
 
       <div className="w-full">
         {design === 1 && <DesignOne />}
-        {design === 2 && <DesignTwo />}
         {design === 3 && <DesignThree />}
         {design === 4 && <DesignFour />}
         {design === 5 && <DesignFive />}
-        {design === 6 && <DesignSix />}
         {design === 7 && <DesignSeven />}
         {design === 8 && <DesignEight />}
       </div>
